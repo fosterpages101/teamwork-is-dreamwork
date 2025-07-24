@@ -59,8 +59,9 @@
             padding: 1.5rem;
             margin-top: 1.5rem;
             background-color: #f5f3ff; /* Lighter purple background */
-            transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out, padding 0.5s ease-in-out, margin 0.5s ease-in-out; /* Smoother transition for all properties */
-            min-height: 150px; /* Ensure consistent height for initial display */
+            /* Ensure all relevant properties transition smoothly */
+            transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out, padding 0.5s ease-in-out, margin 0.5s ease-in-out;
+            /* Removed min-height from here to prevent interference with collapse */
         }
         .hidden-scenario {
             opacity: 0;
@@ -69,14 +70,15 @@
             padding-bottom: 0; /* Collapse padding */
             margin-top: 0; /* Collapse margin */
             margin-bottom: 0; /* Collapse margin */
-            overflow: hidden;
+            overflow: hidden; /* Crucial for max-height:0 to work */
         }
         .visible-scenario {
             opacity: 1;
-            max-height: 1000px; /* Increased to a very large value to ensure content is never cut off */
+            max-height: 2000px; /* Increased to a very large value to ensure content is never cut off */
             padding: 1.5rem; /* Restore padding */
             margin-top: 1.5rem; /* Restore margin */
             margin-bottom: 1.5rem; /* Restore margin */
+            min-height: 150px; /* Apply min-height only when visible */
         }
     </style>
 </head>
