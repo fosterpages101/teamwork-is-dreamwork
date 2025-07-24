@@ -59,19 +59,24 @@
             padding: 1.5rem;
             margin-top: 1.5rem;
             background-color: #f5f3ff; /* Lighter purple background */
-            transition: all 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Smoother transition for all properties */
             min-height: 150px; /* Ensure consistent height */
         }
         .hidden-scenario {
             opacity: 0;
             max-height: 0;
+            padding-top: 0; /* Collapse padding */
+            padding-bottom: 0; /* Collapse padding */
+            margin-top: 0; /* Collapse margin */
+            margin-bottom: 0; /* Collapse margin */
             overflow: hidden;
-            padding: 0 1.5rem; /* Adjust padding when hidden */
         }
         .visible-scenario {
             opacity: 1;
-            max-height: 500px; /* Arbitrarily large to allow content */
-            padding: 1.5rem;
+            max-height: 500px; /* Arbitrarily large to allow content to expand */
+            padding: 1.5rem; /* Restore padding */
+            margin-top: 1.5rem; /* Restore margin */
+            margin-bottom: 1.5rem; /* Restore margin */
         }
     </style>
 </head>
@@ -174,7 +179,7 @@
                 </div>
 
                 <!-- Good Scenario (initially hidden) -->
-                <div id="goodScenario" class="scenario-box hidden-scenario bg-green-50 border-green-300 absolute top-0 left-0 w-full">
+                <div id="goodScenario" class="scenario-box hidden-scenario bg-green-50 border-green-300">
                     <h3 class="text-2xl mb-3 text-green-700">Scenario: The "Superpower" Way!</h3>
                     <p class="text-lg text-gray-800 mb-4">
                         <strong>Dev:</strong> "Hey [Your Name], I'm seeing an issue with the `users` table in the `production` database.
@@ -217,6 +222,10 @@
             const goodScenario = document.getElementById('goodScenario');
 
             let isGoodScenarioVisible = false;
+
+            // Initially hide the good scenario and ensure bad scenario is visible
+            goodScenario.classList.add('hidden-scenario');
+            badScenario.classList.add('visible-scenario');
 
             toggleScenarioBtn.addEventListener('click', () => {
                 if (isGoodScenarioVisible) {
